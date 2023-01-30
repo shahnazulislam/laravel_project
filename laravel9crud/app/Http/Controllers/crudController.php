@@ -43,4 +43,32 @@ class crudController extends Controller
         $editData = crud::find($id);
         return view('edit_data', compact('editData'));
     }
+
+    public function updateData(request $request, $id)
+    {
+        $roles =[
+            'name'=> 'required|max:15',
+            'email'=> 'required|email',
+        ];
+        $rm = [
+            'name.required'=> 'Please inter your name',
+            'name.max'=> 'Name must be 15 carector',
+            'email.required'=> 'Please inter your email',
+            'email.email'=> 'Name must be valided',
+        ];
+        $this->validate($request, $roles, $rm);
+
+        $crud =crud::find($id);
+        $crud->name = $request->name;
+        $crud->email = $request->email;
+        $crud->save();
+        
+    }
+    public function deleteData($id=null)
+    {
+        $deleteData = crud::find($id);
+        $deleteData->delete();
+        Session::flash('msg', 'Data Delete Successfuly');
+        return redirect('/');
+    }
 }

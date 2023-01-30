@@ -34,8 +34,8 @@
           <td>{{$data->name}}</td>
           <td>{{$data->email}}</td>
           <td class="d-flex justify-content-around">
-            <a href="" class="btn btn-success">Edit</a>
-            <a href="" class="btn btn-danger">Delete</a>
+            <a href="{{url('/edit_data/'.$data->id)}}" class="btn btn-success">Edit</a>
+            <a href="{{url('/delete_data/'.$data->id)}}" onclick="return confurm('Are you sure to delete')" class="btn btn-danger">Delete</a>
           </td>
         </tr>
         @endforeach
